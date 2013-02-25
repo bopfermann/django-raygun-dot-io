@@ -8,7 +8,7 @@ setup(
     name='django-raygun-dot-io',
     version='0.0.1',
     install_requires=[
-        'psutils'
+        'psutil'
     ],
     description=description,
     long_description=long_desc,
