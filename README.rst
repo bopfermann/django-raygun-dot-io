@@ -16,6 +16,8 @@ Install from Github:
 
 OR download and...
 
+::
+
     $ python setup.py install
 
 Add the middleware class to your ``MIDDLEWARE_CLASSES``:
