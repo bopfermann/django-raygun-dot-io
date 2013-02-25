@@ -98,11 +98,13 @@ setup(
     name='django-raygun-dot-io',
     version='0.0.1',
     install_requires=[
-        'psutil'
+        'psutil',
+        'requests'
     ],
     description=description,
     long_description=long_desc,
     author='Brandon Opfermann',
     author_email='bopfermann@wanttt.com',
-    packages=find_packages()
+    packages=find_packages(),
+    package_data=find_package_data(),
 )

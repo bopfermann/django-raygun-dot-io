@@ -12,7 +12,7 @@ Install from Github:
 
 ::
 
-    $ pip install -e git://github.com/bopfermann/django-raygun-dot-io.git#egg=django-raygun-dot-io
+    $ pip install git+https://github.com/bopfermann/django-raygun-dot-io.git#egg=django_raygun_dot_io
 
 Add the middleware class to your ``MIDDLEWARE_CLASSES``:
 
