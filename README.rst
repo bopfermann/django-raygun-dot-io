@@ -12,7 +12,7 @@ Install from Github:
 
 ::
 
-    $ pip install -e git://github.com/xxbrandonoxx/django-raygun-dot-io.git#egg=django-raygun-dot-io
+    $ pip install -e git://github.com/bopfermann/django-raygun-dot-io.git#egg=django-raygun-dot-io
 
 Add the middleware class to your ``MIDDLEWARE_CLASSES``:
 
@@ -38,4 +38,7 @@ Settings
 * ``RAYGUN_API_KEY``: This is your private Raygun.IO API Key
   for the configured application.  Please get this from
   Application Settings at https://app.raygun.io/
+
+* ``RAYGUN_API_ENABLED``: This will turn the error reporting
+  on or off (True or False) (Default: False)
 
