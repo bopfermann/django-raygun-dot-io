@@ -39,7 +39,3 @@ Settings
   for the configured application.  Please get this from
   Application Settings at https://app.raygun.io/
 
-License
--------
-
-BSD, short and sweet.
