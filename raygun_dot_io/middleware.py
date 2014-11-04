@@ -69,10 +69,10 @@ class RaygunException(object):
             'url': self.request.path,
             'httpMethod': self.request.method,
             'ipAddress': self.request.META.get('REMOTE_ADDR', '?'),
-            'queryString': self.request.GET.dict(),
-            'form': self.request.POST.dict(),
+            'queryString': dict((key, self.request.GET[key]) for key in self.request.GET),
+            'form': dict((key, self.request.POST[key]) for key in self.request.POST),
             'headers': _headers,
-            'rawData': self.request.body,
+            'rawData': self.request.body if hasattr(self.request, 'body') else self.request.raw_post_data
         }
 
     def _getClientData(self):
