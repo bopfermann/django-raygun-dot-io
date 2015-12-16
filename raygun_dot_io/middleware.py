@@ -79,7 +79,7 @@ class RaygunException(object):
         return {
             'name': 'Raygun.IO Django API',
             'version': '1.0.0',
-            'clientUrl': 'http://wanttt.com'
+            'clientUrl': self.request.build_absolute_uri('/')
         }
 
     def _getErrorData(self):
