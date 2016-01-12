@@ -86,7 +86,7 @@ class RaygunException(object):
         (e_type, e_value, e_tb) = sys.exc_info()
 
         return {
-            'message': self.exception.message,
+            'message': getattr(self.exception, 'message', self.exception.args[0] if self.exception.args else ''),
             'data': {
                 'type': e_type.__name__,
             },
