@@ -34,7 +34,8 @@ class RaygunDotIOMiddleware(object):
 
     def handle_transport(self, rgException):
         headers = {'X-ApiKey': self.RAYGUN_API_KEY}
-        requests.post(self.RAYGUN_API_URL, data=rgException.toJson(), headers=headers, timeout=2)
+        response = requests.post(self.RAYGUN_API_URL, data=rgException.toJson(), headers=headers, timeout=2)
+        response.raise_for_status()
 
 
 class RaygunException(object):
