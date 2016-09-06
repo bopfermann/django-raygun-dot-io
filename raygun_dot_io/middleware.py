@@ -62,7 +62,7 @@ class RaygunException(object):
         headers = self.request.META.items()
         _headers = dict()
         for k, v in headers:
-            if not k.startswith('wsgi'):
+            if not k.startswith(('wsgi', 'gunicorn')):
                 _headers[k] = v
 
         return {
