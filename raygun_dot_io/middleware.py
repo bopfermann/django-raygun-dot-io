@@ -34,7 +34,8 @@ class RaygunDotIOMiddleware(object):
 
     def handle_transport(self, rgException):
         headers = {'X-ApiKey': self.RAYGUN_API_KEY}
-        requests.post(self.RAYGUN_API_URL, data=rgException.toJson(), headers=headers, timeout=2)
+        response = requests.post(self.RAYGUN_API_URL, data=rgException.toJson(), headers=headers, timeout=2)
+        response.raise_for_status()
 
 
 class RaygunException(object):
@@ -61,7 +62,7 @@ class RaygunException(object):
         headers = self.request.META.items()
         _headers = dict()
         for k, v in headers:
-            if not k.startswith('wsgi'):
+            if not k.startswith(('wsgi', 'gunicorn')):
                 _headers[k] = v
 
         return {
@@ -72,7 +73,7 @@ class RaygunException(object):
             'queryString': dict((key, self.request.GET[key]) for key in self.request.GET),
             'form': dict((key, self.request.POST[key]) for key in self.request.POST),
             'headers': _headers,
-            'rawData': self.request.body if hasattr(self.request, 'body') else self.request.raw_post_data
+            'rawData': self.request.read().decode('utf-8'),
         }
 
     def _getClientData(self):
@@ -86,7 +87,7 @@ class RaygunException(object):
         (e_type, e_value, e_tb) = sys.exc_info()
 
         return {
-            'message': self.exception.message,
+            'message': getattr(self.exception, 'message', self.exception.args[0] if self.exception.args else ''),
             'data': {
                 'type': e_type.__name__,
             },
